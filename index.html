@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPA Calculator & Planner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #f5f7ff, #d0d5e6);
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 1rem;
+        }
+
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 32px;
+        }
+
+        .logo span {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-get-started {
+            background: #4f46e5;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            padding: 4rem 0;
+            background: linear-gradient(to right, #eef2ff, #e0e7ff);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            color: #522dc2;
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            background: #edf1ff;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .why-choose,
+        .advanced-tools {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .features,
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .feature-box,
+        .tool-box {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-box:hover,
+        .tool-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            font-size: 2rem;
+            color: #3d5afe;
+            margin-bottom: 1rem;
+        }
+        h1, h2 {
+  text-align: center;
+  margin-top: 40px;
+  color: #3e00b8;
+}
+
+.highlight {
+  color: #7a40f2;
+}
+
+p {
+  text-align: center;
+  max-width: 800px;
+  margin: 10px auto;
+}
+
+.interface-section .screenshots {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.screenshots img {
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.testimonials {
+  background: #eef0ff;
+  padding: 40px 20px;
+}
+
+.reviews {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.review-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.review-card span {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+.cta-section {
+  background: #fff;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.cta-section img {
+  margin-top: 20px;
+  width: 150px;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.features div {
+  background: #f1f1f9;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+}
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 14px;
+}
+
+footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer i.fa-heart {
+    color: #e74c3c; /* Red heart */
+    margin: 0 5px;
+}
+
+        @media (min-width: 768px) {
+            .hero-content {
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+
+        .text-content {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .rating {
+            background: #fff7ed;
+            color: #b45309;
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .text-content h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .text-content h1 span {
+            color: #4f46e5;
+        }
+
+        .text-content p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #374151;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #4f46e5;
+            border: 1px solid #4f46e5;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .stats div {
+            text-align: center;
+        }
+
+        .image-content {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .image-content img {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        @media (min-width: 768px) {
+            .image-content img {
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <img src="logo.PNG" alt="logo" />
+                <span>GPA Calculator & Planner</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#download">Download</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="btn-get-started">Get Started</a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="text-content">
+                <div class="rating">4.9 Rated on Play Store</div>
+                <h1>GPA Calculator <span>& Planner!</span></h1>
+                <p>A flexible and powerful Android app that helps university students calculate GPA, track CGPA, plan
+                    semesters, and customize everything to fit their academic needs.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary">Download Now</a>
+                    <a href="#" class="btn-secondary">View Source Code</a>
+                </div>
+                <div class="stats">
+                    <div><strong>50K+</strong><br>Downloads</div>
+                    <div><strong>4.9</strong><br>Play Store Rating</div>
+                    <div><strong>10+</strong><br>Languages</div>
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="mob.PNG" alt="App Screenshot" />
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose">
+        <h2>Why Choose <span class="highlight">Our App?</span></h2>
+        <div class="features">
+            <div class="feature-box">
+                <div class="icon"></div>
+                <h3>All-in-One GPA Suite</h3>
+                <p>Calculate semester GPA, cumulative GPA, convert percentages, and generate professional reports—all in
+                    one app.</p>
+            </div>
+            <div class="feature-box">
+                <div class="icon"></div>
+                <h3>Customizable & Flexible</h3>
+                <p>Adapt grading scales, course templates, and planner tools to fit any university or personal academic
+                    need.</p>
+            </div>
+            <div class="feature-box">
+                <div class="icon"></div>
+                <h3>Private & Ad-Free</h3>
+                <p>Enjoy a secure, offline experience with no ads—your data stays private and your focus remains on your
+                    goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="advanced-tools">
+        <div class="section-label">⭐ Comprehensive Features</div>
+        <h2>Advanced GPA Tools</h2>
+        <p class="subtitle">
+            Discover the most advanced GPA & CGPA calculation, planning, and reporting features—fully customizable and
+            designed for every university system.
+        </p>
+        <div class="tools">
+            <div class="tool-box">
+                <div class="icon"></div>
+                <h3>Semester GPA Calculator</h3>
+                <p>Input course marks (manual or via templates) to compute GPA, percentage, average marks, total
+                    credits, and obtain a polished PDF report.</p>
+            </div>
+            <div class="tool-box">
+                <div class="icon"></div>
+                <h3>Cumulative GPA Calculator</h3>
+                <p>Track academic progress across semesters, with options to include/exclude credit hours. Supports 4.0,
+                    5.0, and 10.0 scales, plus detailed CGPA breakdown and PDF export.</p>
+            </div>
+            <div class="tool-box">
+                <div class="icon"></div>
+                <h3>Strategic GPA Planner</h3>
+                <p>Set a target CGPA and calculate the required semester GPAs for the remaining terms. Includes
+                    achievability analysis to assess your goals.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Section 1: UI Interface Preview -->
+  <section class="interface-section">
+    <h1>Beautiful Interface</h1>
+    <p>Experience a clean, intuitive design that makes GPA tracking and planning effortless and enjoyable.</p>
+    <div class="screenshots">
+      <img src="mob1.jpeg" alt="Dashboard UI">
+      <img src="mob2.jpeg" alt="GPA Calculator UI">
+      <img src="mob3.jpeg" alt="CGPA Calculator UI">
+      <img src="mob4.jpeg" alt="GPA Planner UI">
+      <img src="mob5.jpeg" alt="GPA Planner UI">
+      <img src="mob7.jpeg" alt="GPA Planner UI">
+    </div>
+  </section>
+
+  <!-- Section 2: Student Testimonials -->
+  <section class="testimonials">
+    <h2>What <span class="highlight">Students Say</span></h2>
+    <p>Join thousands of satisfied students who trust our GPA Calculator & Planner.</p>
+    <div class="reviews">
+      <div class="review-card">
+        <p>⭐⭐⭐⭐⭐</p>
+        <p>"I'm thoroughly impressed with the GPA Calculator & Planner app! It's incredibly user-friendly and flexible..."</p>
+        <span>— Azib Waqas, Student</span>
+      </div>
+      <div class="review-card">
+        <p>⭐⭐⭐⭐⭐</p>
+        <p>"Using the GPA Calculator app has been a game-changer for me. It’s incredibly user-friendly..."</p>
+        <span>— Khalid Mahmood, Student</span>
+      </div>
+      <div class="review-card">
+        <p>⭐⭐⭐⭐⭐</p>
+        <p>"I found the GPA calculator app to be incredibly useful for keeping track of my grades..."</p>
+        <span>— Muhammad Akbar, Student</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Call to Action -->
+  <section class="cta-section">
+    <h2>Ready to Transform Your <span class="highlight">Academic Journey?</span></h2>
+    <p>Join thousands of students who are already using our app to achieve their academic goals.</p>
+    <a href="#"><img src="googalplay.PNG" alt="Get it on Google Play"></a>
+    <div class="features">
+      <div> 100% Free to use</div>
+      <div> No ads or subscriptions</div>
+      <div> Offline functionality</div>
+      <div> 10+ Languages supported</div>
+      <div> Professional PDF reports</div>
+      <div> Regular updates</div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-content">
+        <p>&copy; 2025 Hindustan Tech. Made with <i class="fas fa-heart"></i> by Abu Zar Mohtasim</p>
+    </div>
+</footer>
+
+    
+    <script>
+        // Smooth scroll behavior for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 60,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Highlight nav link on scroll (optional)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 70;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
