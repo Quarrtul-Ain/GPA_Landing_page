@@ -189,6 +189,13 @@ p {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
+.screenshots .slide{
+    display: none;
+    width: 20%;
+}
+.screenshots .slide.active{
+    display: block;
+}
 
 .testimonials {
   background: #eef0ff;
@@ -217,6 +224,31 @@ p {
   margin-top: 10px;
   font-weight: bold;
   color: #555;
+}
+.review-card {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.2s ease-in-out;
+   border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  text-align: left
+  
+
+}
+
+.review-card.active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+}
+
+.review-card.exit-left {
+  transform: translateX(-100%);
+  opacity: 0;
 }
 
 .cta-section {
@@ -455,13 +487,17 @@ footer i.fa-heart {
     <h1>Beautiful Interface</h1>
     <p>Experience a clean, intuitive design that makes GPA tracking and planning effortless and enjoyable.</p>
     <div class="screenshots">
-        <img src="dashbord.jpeg" alt="dashbord">
-      <img src="mob1.jpeg" alt="Dashboard UI">
-      <img src="mob2.jpeg" alt="GPA Calculator UI">
-      <img src="mob3.jpeg" alt="CGPA Calculator UI">
-      <img src="mob4.jpeg" alt="GPA Planner UI">
-      <img src="mob5.jpeg" alt="GPA Planner UI">
-      <img src="mob7.jpeg" alt="GPA Planner UI">
+        <img class="slide" src="dashbord.jpeg" alt="dashbord">
+      <img  class="slide" src="mob1.jpeg" alt="Dashboard UI">
+      <img class="slide" src="mob2.jpeg" alt="GPA Calculator UI">
+      <img class="slide" src="mob3.jpeg" alt="CGPA Calculator UI">
+      <img class="slide" src="mob4.jpeg" alt="GPA Planner UI">
+      <img class="slide" src="mob5.jpeg" alt="GPA Planner UI">
+      <img class="slide" src="mob7.jpeg" alt="GPA Planner UI">
+      <img class="slide" src="mob8.jpeg" alt="GPA Planner UI">
+      <img class="slide" src="mob9.jpeg" alt="GPA Planner UI">
+      <img class="slide" src="mob10.jpeg" alt="GPA Planner UI">
+      <img class="slide" src="mob11.jpeg" alt="GPA Planner UI">
     </div>
   </section>
 
@@ -470,6 +506,22 @@ footer i.fa-heart {
     <h2>What <span class="highlight">Students Say</span></h2>
     <p>Join thousands of satisfied students who trust our GPA Calculator & Planner.</p>
     <div class="reviews">
+      <div class="review-card">
+        <p>⭐⭐⭐⭐⭐</p>
+        <p>"I'm thoroughly impressed with the GPA Calculator & Planner app! It's incredibly user-friendly and flexible..."</p>
+        <span>— Azib Waqas, Student</span>
+      </div>
+      <div class="review-card">
+        <p>⭐⭐⭐⭐⭐</p>
+        <p>"Using the GPA Calculator app has been a game-changer for me. It's incredibly user-friendly..."</p>
+        <span>— Khalid Mahmood, Student</span>
+      </div>
+      <div class="review-card">
+        <p>⭐⭐⭐⭐⭐</p>
+        <p>"I found the GPA calculator app to be incredibly useful for keeping track of my grades..."</p>
+        <span>— Muhammad Akbar, Student</span>
+        
+      </div>
       <div class="review-card">
         <p>⭐⭐⭐⭐⭐</p>
         <p>"I'm thoroughly impressed with the GPA Calculator & Planner app! It's incredibly user-friendly and flexible..."</p>
@@ -563,6 +615,52 @@ footer i.fa-heart {
     reviewCards.forEach(card => {
       observer.observe(card);
     });
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".screenshots .slide");
+    let current = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) {
+          slide.classList.add("active");
+        }
+      });
+    }
+
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+
+    showSlide(current); // Show first slide
+
+    setInterval(nextSlide, 3000); // Change slide every 3 seconds
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".review-card");
+    let current = 0;
+
+    function showSlide(index) {
+      cards.forEach((card, i) => {
+        card.classList.remove("active", "exit-left");
+        if (i === index) {
+          card.classList.add("active");
+        } else if (i === (index - 1 + cards.length) % cards.length) {
+          card.classList.add("exit-left");
+        }
+      });
+    }
+
+    function nextSlide() {
+      current = (current + 1) % cards.length;
+      showSlide(current);
+    }
+
+    showSlide(current); // Show the first slide
+
+    setInterval(nextSlide, 4000); // Change testimonial every 4 seconds
   });
 
     </script>
