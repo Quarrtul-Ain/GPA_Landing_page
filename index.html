@@ -545,6 +545,24 @@ footer i.fa-heart {
                 }
             });
         });
+         document.addEventListener("DOMContentLoaded", function () {
+    const reviewCards = document.querySelectorAll('.review-card');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // animate once
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    reviewCards.forEach(card => {
+      observer.observe(card);
+    });
+  });
 
     </script>
 </body>
